@@ -1,9 +1,11 @@
 package session
 
 import (
+	"encoding/gob"
 	"net/http"
 
 	"github.com/gorilla/sessions"
+	"github.com/haisum/focusedu/db/models"
 )
 
 type Session interface {
@@ -29,6 +31,7 @@ var s *httpsession
 
 func GetHTTPSession(w http.ResponseWriter, r *http.Request) (Session, error) {
 	if s == nil {
+		registerGobTypes()
 		s = &httpsession{}
 		s.store = sessions.NewFilesystemStore("", []byte(authKey), []byte(encKey))
 	}
@@ -55,4 +58,7 @@ func (s httpsession) Set(key string, val interface{}) {
 
 func (s httpsession) Save() error {
 	return s.session.Save(s.r, s.w)
+}
+func registerGobTypes() {
+	gob.Register(&models.User{})
 }
