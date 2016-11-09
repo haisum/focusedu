@@ -1,7 +1,10 @@
 package models
 
+import "github.com/haisum/focusedu/db"
+
 type User struct {
 	CurrentStep Step
+	RollNo      string
 }
 
 type Step int
@@ -14,3 +17,7 @@ const (
 	ModuleTest
 	Feedback
 )
+
+func GetUser(RollNo string) User {
+	db := db.Get()
+}
