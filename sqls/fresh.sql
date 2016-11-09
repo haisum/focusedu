@@ -11,7 +11,7 @@ User
 	FOREIGN KEY(trackartist) REFERENCES artist(artistid)
 */
 CREATE TABLE User(ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                         Name TEXT, Age INTEGER, RollNo TEXT, Gender INTEGER, RegisteredAt INTEGER, MidtermScore INTEGER, CurrentScore INTEGER);
+                                         Name TEXT DEFAULT "", Age INTEGER DEFAULT 0, RollNo TEXT UNIQUE , Gender INTEGER DEFAULT 0, RegisteredAt INTEGER DEFAULT 0, MidtermScore INTEGER DEFAULT 0, CurrentScore INTEGER DEFAULT 0, CurrentStep INTEGER DEFAULT 0);
 CREATE INDEX User_RollNo ON USER (RollNo);
 
 /*

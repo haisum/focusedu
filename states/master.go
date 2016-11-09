@@ -16,6 +16,8 @@ var MasterHandler = func(w http.ResponseWriter, r *http.Request) {
 	state, err := getState(s)
 	if err != nil || state == nil {
 		log.WithError(err).Error("Error in getting state.")
+		http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		return
 	}
 	r.ParseForm()
 	if r.Method == http.MethodGet {

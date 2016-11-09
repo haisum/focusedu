@@ -45,18 +45,18 @@ func GetHTTPSession(w http.ResponseWriter, r *http.Request) (Session, error) {
 	return s, nil
 }
 
-func (s httpsession) Get(key string) interface{} {
+func (s *httpsession) Get(key string) interface{} {
 	if val, ok := s.session.Values[key]; ok {
 		return val
 	}
 	return nil
 }
 
-func (s httpsession) Set(key string, val interface{}) {
+func (s *httpsession) Set(key string, val interface{}) {
 	s.session.Values[key] = val
 }
 
-func (s httpsession) Save() error {
+func (s *httpsession) Save() error {
 	return s.session.Save(s.r, s.w)
 }
 func registerGobTypes() {

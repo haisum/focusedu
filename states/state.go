@@ -4,6 +4,7 @@ import (
 	"io"
 	"net/url"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/haisum/focusedu/db/models"
 	"github.com/haisum/focusedu/session"
 	"github.com/haisum/focusedu/states/login"
@@ -21,12 +22,18 @@ func getState(s session.Session) (State, error) {
 		user = val.(*models.User)
 	}
 	var state State
+	log.Info("Getting state info.")
 	if user == nil {
-		state = login.LoginState{}
+		log.Info("No state found, setting to login state")
+		state = &login.LoginState{}
 	} else {
 		switch user.CurrentStep {
 
 		}
+	}
+	if state != nil {
+		log.Info("Setting session.")
+		state.SetSession(s)
 	}
 	return state, nil
 }
