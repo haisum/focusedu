@@ -7,6 +7,8 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/haisum/focusedu/db/models"
 	"github.com/haisum/focusedu/session"
+	"github.com/haisum/focusedu/states/demo"
+	"github.com/haisum/focusedu/states/info"
 	"github.com/haisum/focusedu/states/login"
 )
 
@@ -28,7 +30,10 @@ func getState(s session.Session) (State, error) {
 		state = &login.LoginState{}
 	} else {
 		switch user.CurrentStep {
-
+		case models.StepDemoOne:
+			state = &demo.DemoOneState{}
+		default:
+			state = &info.InfoState{}
 		}
 	}
 	if state != nil {

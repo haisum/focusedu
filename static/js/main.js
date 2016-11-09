@@ -19,5 +19,6 @@ Handlebars.registerHelper('prettyDate', function(unixDate) {
 $.ajaxSetup({ cache: false });
 var app = {
     init : function(){
+        $('select').material_select();
     }
 }

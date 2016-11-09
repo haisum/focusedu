@@ -27,10 +27,10 @@ func (ls *LoginState) Render(w io.Writer, values url.Values) error {
 	return nil
 }
 func (ls *LoginState) Process(values url.Values) error {
-	if _, ok := values["RollNo"]; !ok || len(values["RollNo"]) != 1 {
+	if values.Get("RollNo") == "" {
 		return fmt.Errorf("RollNo is required.")
 	}
-	rollno := values["RollNo"][0]
+	rollno := values.Get("RollNo")
 	user, err := models.GetUser(rollno)
 	if err != nil {
 		if err.Error() == "sql: no rows in result set" {

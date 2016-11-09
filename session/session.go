@@ -4,6 +4,7 @@ import (
 	"encoding/gob"
 	"net/http"
 
+	log "github.com/Sirupsen/logrus"
 	"github.com/gorilla/sessions"
 	"github.com/haisum/focusedu/db/models"
 )
@@ -57,8 +58,14 @@ func (s *httpsession) Set(key string, val interface{}) {
 }
 
 func (s *httpsession) Save() error {
-	return s.session.Save(s.r, s.w)
+	err := s.session.Save(s.r, s.w)
+	if err != nil {
+		log.WithError(err).Error("Error in saving session.")
+	}
+	return err
 }
 func registerGobTypes() {
 	gob.Register(&models.User{})
+	var mp map[string]string
+	gob.Register(mp)
 }
