@@ -15,7 +15,7 @@
         <div id="content" style="max-width:80%;margin:0 auto;">
             <div id="login-page" class="row">
                 <div class="col s12 z-depth-4 card-panel">
-                  <h2>Hello {{ .Name }}</h2>
+               
                   <p><b>Remember, it is very important to get the letters in the same order as you see them.<br>
 If you forget one, use the BLANK box to mark the position.
  </p>
