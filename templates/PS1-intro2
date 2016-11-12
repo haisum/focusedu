@@ -16,15 +16,17 @@
             <div id="login-page" class="row">
                 <div class="col s12 z-depth-4 card-panel">
                   <h2>Hello {{ .Name }}</h2>
-                  <p>For this practice set, letters will appear on the screen one at a time.
-Try to remember each letter in the order presented. <b> <b> </p>
+                  <p><b>For this practice set, letters will appear on the screen one at a time.
+Try to remember each letter in the order presented.  </p>
+<br>
 <p>
 After 2-3 letters have been shown, you will see a screen listing 12 possible letters.<br>
 Your job is to select each letter in the order presented.
-To do this, tap the letters you want to select. <b> <b> </p>
+To do this, tap the letters you want to select. </p> <br>
 <p>
-The letters you select will appear at the bottom of the screen,<b> <b> </p>
-
+The letters you select will appear at the bottom of the screen. </p>
+<br>
+<p>
 Tap the screen to continue
 </p>
                 </div>
