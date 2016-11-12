@@ -15,7 +15,7 @@
         <div id="content" style="max-width:80%;margin:0 auto;">
             <div id="login-page" class="row">
                 <div class="col s12 z-depth-4 card-panel">
-                  <h2>Hello {{ .Name }}</h2>
+          
                   <p><b>Now you will practice doing the math part of the experiment.<br>
  </p>
 <br>
