@@ -11,12 +11,21 @@ import (
 	"github.com/haisum/focusedu/session"
 )
 
+const (
+	TotalSets int = 10
+)
+
 type DemoOneState struct {
 	s session.Session
 }
 
 type demoOneData struct {
 	Name string
+}
+
+type DemoOneSession struct {
+	CurrentSet int
+	Letters    []string
 }
 
 const demoOneIntroTemplate = "demo1_intro.gohtml"

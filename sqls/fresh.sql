@@ -22,7 +22,7 @@ OSPANQuestion - Stores questions and there answers for ospan
 	- isTrue
 */
 CREATE TABLE OSPANQuestion(ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                                  Question TEXT, OPTION TEXT, isTrue INTEGER);
+                                                  Question TEXT DEFAULT "", Option TEXT DEFAULT "", IsTrue INTEGER DEFAULT 0);
 
 /*
 DemoResult
