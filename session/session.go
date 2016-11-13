@@ -7,6 +7,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/gorilla/sessions"
 	"github.com/haisum/focusedu/db/models"
+	"github.com/haisum/focusedu/set"
 )
 
 type Session interface {
@@ -68,4 +69,8 @@ func registerGobTypes() {
 	gob.Register(&models.User{})
 	var mp map[string]string
 	gob.Register(mp)
+	sets := set.Sets{}
+	gob.Register(sets)
+	results := make(map[int]set.SetResult)
+	gob.Register(results)
 }

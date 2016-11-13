@@ -32,6 +32,8 @@ func getState(s session.Session) (State, error) {
 		switch user.CurrentStep {
 		case models.StepDemoOne:
 			state = &demo.DemoOneState{}
+		case models.StepDemoTwo:
+			state = &demo.DemoTwoState{}
 		default:
 			state = &info.InfoState{}
 		}

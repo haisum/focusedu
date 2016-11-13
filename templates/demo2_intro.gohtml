@@ -13,18 +13,24 @@
     </head>
     <body class="cyan grey-text text-darken-3">
         <div id="content" style="max-width:80%;margin:0 auto;">
-            <div id="login-page" class="row" >
-                <div class="col s12 z-depth-4 card-panel center-align">
-                    <h3 class="ospan-result">{{.Percentage}}%</h3>
-                    <br/><br/>
-                    {{if .CorrectLetters}}
-                    <h5 class="ospan-result-summary">You recalled {{.CorrectLetters}} letters correctly out of {{.Total}}.</h5>
-                    {{end}}
-                    {{if .CorrectAnswers}}
-                    <h5 class="ospan-result-summary">You answered {{.CorrectAnswers}} questions correctly out of {{.Total}}.</h5>
-                    {{end}}
-                    <form action="/" method="post">
-                    </form>
+            <div id="login-page" class="row">
+                <div class="col s12 z-depth-4 card-panel">
+                <p><b>Now you will practice doing the math part of the experiment.<br>
+                 </p>
+                <br>
+                <p>A math problem will appear on the screen, like this: <br>
+
+                (2 * 1) + 1 = ?
+                </p>
+                <br>
+                <p>As soon as you see the math problem, you should compute the correct answer.
+                In the above problem, the answer 3 is correct. </p>
+
+                <br>
+                <p>When you know the correct answer, you will tap the screen. <br><br>
+                </p> </b>
+                </p>
+                <form method="post" action="/"></form>
                 </div>
             </div>
         </div>
@@ -33,13 +39,13 @@
         <script src="static/js/vendor/materialize.min.js"></script>
         <script src="static/js/vendor/materialize.clockpicker.js"></script>
         <script src="static/js/main.js"></script>
-        <script>
-        $(app.init);
-        $(function(){
-            $("body").on("click", function(){
-                $("form").submit();
+        <script>$(app.init);</script>
+        <script type="text/javascript">
+            $(function(){
+                $("body").on("click", function(){
+                    $("form").submit();
+                });
             });
-        });
         </script>
     </body>
 </html>

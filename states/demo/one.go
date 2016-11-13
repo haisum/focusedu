@@ -126,6 +126,7 @@ func (ds *DemoOneState) Process(values url.Values) error {
 				ds.s.Set("result", nil)
 				ds.s.Set(currentSetSession, nil)
 				ds.s.Set(currentLetterSession, nil)
+				ds.s.Set("user", user)
 				err = ds.s.Save()
 				return err
 			}
@@ -146,7 +147,7 @@ func (ds *DemoOneState) Process(values url.Values) error {
 		err := ds.s.Save()
 		return err
 	}
-	log.Infof("Incrementing letter index to %s", currentLetterIndex+1)
+	log.Infof("Incrementing letter index to %d", currentLetterIndex+1)
 	ds.s.Set(currentLetterSession, currentLetterIndex+1)
 	return ds.s.Save()
 }

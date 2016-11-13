@@ -17,16 +17,19 @@
                 <div class="col s12 z-depth-4 card-panel center-align">
                     <div class="row">
                         <div class="col s12">
-                            <h3 class="ospan-answer">2</h3>
+                            <h3 class="ospan-answer">{{.Option}}</h3>
                         </div>
                         <div class="col s12 buttons">
                             <div class="input-field col s5">
-                              <button class="btn-large pink lighten-1 waves-effect waves-light col s12">True</button>
+                              <button id="truebtn" class="btn-large pink lighten-1 waves-effect waves-light col s12">True</button>
                             </div>
                             <div class="input-field col s5 offset-s2">
-                              <button class="btn-large pink lighten-1 waves-effect waves-light col s12">False</button>
+                              <button id="falsebtn" class="btn-large pink lighten-1 waves-effect waves-light col s12">False</button>
                             </div>
                         </div>
+                        <form method="post" action="/">
+                            <input id="IsTrue" type="hidden" name="IsTrue">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -37,5 +40,15 @@
         <script src="static/js/vendor/materialize.clockpicker.js"></script>
         <script src="static/js/main.js"></script>
         <script>$(app.init);</script>
+        <script type="text/javascript">
+            $("#truebtn").on("click", function(){
+                $("#IsTrue").val("1");
+                $("form").submit();
+            });
+            $("#falsebtn").on("click", function(){
+                $("#IsTrue").val("0");
+                $("form").submit();
+            });
+        </script>
     </body>
 </html>
