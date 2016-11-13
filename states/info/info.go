@@ -52,7 +52,6 @@ func (is *InfoState) Process(values url.Values) error {
 	user.Gender = models.Gender(getIntOrZero(values.Get("Gender")))
 	user.MidtermScore = getIntOrZero(values.Get("MidtermScore"))
 	user.Name = values.Get("Name")
-	user.CurrentStep = models.StepDemoOne
 	errors := user.Validate()
 	if len(errors) > 0 {
 		log.WithField("errors", errors).Error("Errors occurred")
@@ -60,10 +59,14 @@ func (is *InfoState) Process(values url.Values) error {
 		is.s.Save()
 		return nil
 	}
+	user.CurrentStep = models.StepDemoOne
 	err := user.Update()
 	if err != nil {
 		log.WithError(err).Error("Error saving user.")
+		return err
 	}
+	is.s.Set("user", user)
+	err = is.s.Save()
 	return err
 }
 func (is *InfoState) SetSession(s session.Session) {

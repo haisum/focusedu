@@ -19,86 +19,89 @@
                     <div class="row letter-grid-row">
                         <div class="col s6 m4 letter-container">
                             <div class="row">
-                                <div class="box col s6 m4">1</div>
+                                <div class="box col s6 m4" data-letter="F">_</div>
                                 <div class="col s6 m4 letter">F</div>
                             </div>
                         </div>
                         <div class="col s6 m4 letter-container">
                             <div class="row">
-                                <div class="box col s6 m4">2</div>
+                                <div class="box col s6 m4" data-letter="H">_</div>
                                 <div class="col s6 m4 letter">H</div>
                             </div>
                         </div>
                         <div class="col s6 m4 letter-container">
                             <div class="row">
-                                <div class="box col s6 m4">0</div>
+                                <div class="box col s6 m4" data-letter="J">_</div>
                                 <div class="col s6 m4 letter">J</div>
                             </div>
                         </div>
                         <div class="col s6 m4 letter-container">
                             <div class="row">
-                                <div class="box col s6 m4">3</div>
+                                <div class="box col s6 m4" data-letter="K">_</div>
                                 <div class="col s6 m4 letter">K</div>
                             </div>
                         </div>
                         <div class="col s6 m4 letter-container">
                             <div class="row">
-                                <div class="box col s6 m4">3</div>
-                                <div class="col s6 m4 letter">K</div>
+                                <div class="box col s6 m4" data-letter="L">_</div>
+                                <div class="col s6 m4 letter">L</div>
                             </div>
                         </div>
                         <div class="col s6 m4 letter-container">
                             <div class="row">
-                                <div class="box col s6 m4">3</div>
-                                <div class="col s6 m4 letter">K</div>
+                                <div class="box col s6 m4" data-letter="N">_</div>
+                                <div class="col s6 m4 letter">N</div>
                             </div>
                         </div>
                         <div class="col s6 m4 letter-container">
                             <div class="row">
-                                <div class="box col s6 m4">3</div>
-                                <div class="col s6 m4 letter">K</div>
+                                <div class="box col s6 m4" data-letter="P">_</div>
+                                <div class="col s6 m4 letter">P</div>
                             </div>
                         </div>
                         <div class="col s6 m4 letter-container">
                             <div class="row">
-                                <div class="box col s6 m4">3</div>
-                                <div class="col s6 m4 letter">K</div>
+                                <div class="box col s6 m4" data-letter="Q">_</div>
+                                <div class="col s6 m4 letter">Q</div>
                             </div>
                         </div>
                         <div class="col s6 m4 letter-container">
                             <div class="row">
-                                <div class="box col s6 m4">3</div>
-                                <div class="col s6 m4 letter">K</div>
+                                <div class="box col s6 m4" data-letter="R">_</div>
+                                <div class="col s6 m4 letter">R</div>
                             </div>
                         </div>
                         <div class="col s6 m4 letter-container">
                             <div class="row">
-                                <div class="box col s6 m4">3</div>
-                                <div class="col s6 m4 letter">K</div>
+                                <div class="box col s6 m4" data-letter="S">_</div>
+                                <div class="col s6 m4 letter">S</div>
                             </div>
                         </div>
                         <div class="col s6 m4 letter-container">
                             <div class="row">
-                                <div class="box col s6 m4">3</div>
-                                <div class="col s6 m4 letter">K</div>
+                                <div class="box col s6 m4" data-letter="T">_</div>
+                                <div class="col s6 m4 letter">T</div>
                             </div>
                         </div>
                         <div class="col s6 m4 letter-container">
                             <div class="row">
-                                <div class="box col s6 m4">3</div>
-                                <div class="col s6 m4 letter">K</div>
+                                <div class="box col s6 m4" data-letter="Y">_</div>
+                                <div class="col s6 m4 letter">Y</div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s12 buttons">
                             <div class="input-field col s5">
-                              <button class="btn pink lighten-1 waves-effect waves-light col s12">Clear</button>
+                              <button id="clearbtn" class="btn pink lighten-1 waves-effect waves-light col s12">Clear</button>
                             </div>
                             <div class="input-field col s5 offset-s2">
-                              <button class="btn pink lighten-1 waves-effect waves-light col s12">Exit</button>
+                              <button id="exitbtn" class="btn pink lighten-1 waves-effect waves-light col s12">Exit</button>
                             </div>
                         </div>
+                        <form action="/" method="post">
+                            <input type="hidden" name="Letters" id="Letters">
+                        </form>
                     </div>
                 </div>
             </div>
@@ -109,5 +112,24 @@
         <script src="static/js/vendor/materialize.clockpicker.js"></script>
         <script src="static/js/main.js"></script>
         <script>$(app.init);</script>
+        <script type="text/javascript">
+            var letters = []
+            $(function(){
+                $(".box").on("click", function(){
+                    letters.push($(this).data("letter"))
+                    $(this).text(letters.length);
+                });
+                $("#clearbtn").on("click", function(){
+                    window.location.reload();
+                });
+                $("#clearbtn").on("click", function(){
+                    window.location.reload();
+                });
+                $("#exitbtn").on("click", function(){
+                    $("#Letters").val(letters.join(","));
+                    $("form").submit();
+                });
+            });
+        </script>
     </body>
 </html>

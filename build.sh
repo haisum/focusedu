@@ -6,4 +6,4 @@ if [[ -f focusedu.zip ]]; then
 fi
 
 go build -o focusedu.exe utils/focusedu/*.go
-zip -r focusedu.zip templates static focusedu.exe
+zip -r focusedu.zip templates static sqls focusedu.exe
