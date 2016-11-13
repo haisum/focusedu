@@ -1,6 +1,7 @@
 package models
 
 import (
+	"math"
 	"time"
 
 	log "github.com/Sirupsen/logrus"
@@ -13,15 +14,16 @@ import (
 */
 
 type User struct {
-	ID           int
-	Name         string
-	Age          int
-	RollNo       string
-	Gender       Gender
-	RegisteredAt int64
-	MidtermScore int
-	CurrentScore int
-	CurrentStep  Step
+	ID              int
+	Name            string
+	Age             int
+	RollNo          string
+	Gender          Gender
+	RegisteredAt    int64
+	MidtermScore    int
+	CurrentScore    int
+	CurrentStep     Step
+	QuestionTimeout int64
 }
 
 type Step int
@@ -103,4 +105,27 @@ func (u *User) Update() error {
 		}).Error("Error updating user.")
 	}
 	return err
+}
+
+func (u *User) SetTimeout(totalTimes map[int]int64) {
+	var totalTime int64
+	for _, v := range totalTimes {
+		totalTime += v
+	}
+	mean := float64(totalTime) / float64(len(totalTimes))
+	var variance float64
+	for _, v := range totalTimes {
+		variance += math.Pow(float64(v)-mean, 2)
+	}
+	variance = variance / float64(len(totalTimes))
+	stDev := math.Sqrt(variance)
+	u.QuestionTimeout = int64(math.Ceil(mean + (2.5 * stDev)))
+	log.WithFields(log.Fields{
+		"totalTime":       totalTime,
+		"mean":            mean,
+		"variance":        variance,
+		"stDev":           stDev,
+		"QuestionTimeout": u.QuestionTimeout,
+		"IndividualTimes": totalTimes,
+	}).Info("Setting user timeout")
 }

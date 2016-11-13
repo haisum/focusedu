@@ -36,3 +36,12 @@ var MasterHandler = func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
 	}
 }
+
+var LogoutHandler = func(w http.ResponseWriter, r *http.Request) {
+	s, err := session.GetHTTPSession(w, r)
+	if err != nil {
+		log.WithError(err).Errorf("Can't get session.")
+	}
+	s.Destroy()
+	http.Redirect(w, r, "/", http.StatusFound)
+}

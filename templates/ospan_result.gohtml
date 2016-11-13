@@ -23,6 +23,9 @@
                     {{if .CorrectAnswers}}
                     <h5 class="ospan-result-summary">You answered {{.CorrectAnswers}} questions correctly out of {{.Total}}.</h5>
                     {{end}}
+                    {{if .Time}}
+                        <h5>{{.Time}}</h5>
+                    {{end}}
                     <form action="/" method="post">
                     </form>
                 </div>

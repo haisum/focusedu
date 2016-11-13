@@ -67,3 +67,20 @@ func GetSets(total int, haveLetters, haveQuestions bool) (Sets, error) {
 
 	return sets, nil
 }
+func GetQuestionsSet(total int) (Sets, error) {
+	var sets Sets
+	questionRand := random.NewUniqueRand(len(questions))
+	var s Set
+	for j := 0; j < total; j++ {
+		setItem := SetItem{}
+		qIndex := questionRand.Int()
+		log.Infof("qindex %d", qIndex)
+		if qIndex == -1 {
+			return sets, errors.New("Not enough questions in database!")
+		}
+		setItem.Question = questions[qIndex]
+		s = append(s, setItem)
+	}
+	sets = append(sets, s)
+	return sets, nil
+}

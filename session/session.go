@@ -14,7 +14,22 @@ type Session interface {
 	Get(key string) interface{}
 	Set(key string, val interface{})
 	Save() error
+	Destroy() error
 }
+
+const (
+	CurrentLetterSession    = "currentletter"
+	CurrentSetSession       = "currentset"
+	SetsSession             = "sets"
+	CurrentItemSession      = "currentitem"
+	CurrentItemStateSession = "currentitemstate"
+	ResultsSession          = "results"
+	ShowResultSession       = "result"
+	UserSession             = "user"
+	ShowGridSession         = "showgrid"
+	TotalTimeSession        = "totaltime"
+	StartTimeSession        = "starttime"
+)
 
 type httpsession struct {
 	r       *http.Request
@@ -65,12 +80,21 @@ func (s *httpsession) Save() error {
 	}
 	return err
 }
+
+func (s *httpsession) Destroy() error {
+	for k, _ := range s.session.Values {
+		s.session.Values[k] = nil
+	}
+	err := s.session.Save(s.r, s.w)
+	if err != nil {
+		log.WithError(err).Error("Error in saving session.")
+	}
+	return err
+}
 func registerGobTypes() {
 	gob.Register(&models.User{})
-	var mp map[string]string
-	gob.Register(mp)
-	sets := set.Sets{}
-	gob.Register(sets)
-	results := make(map[int]set.SetResult)
-	gob.Register(results)
+	gob.Register(map[string]string{})
+	gob.Register(set.Sets{})
+	gob.Register(map[int]set.SetResult{})
+	gob.Register(map[int]int64{})
 }
