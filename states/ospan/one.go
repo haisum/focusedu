@@ -1,4 +1,4 @@
-package demo
+package ospan
 
 import (
 	"errors"
@@ -136,7 +136,7 @@ func (ds *DemoOneState) Process(values url.Values) error {
 		log.Info("processing grid, saving results")
 		givenLetters := strings.Split(values.Get("Letters"), ",")
 		correctCount := 0
-		for i := 0; i < len(givenLetters); i++ {
+		for i := 0; i < len(givenLetters) && i < len(letters[currentSetIndex]); i++ {
 			if givenLetters[i] == letters[currentSetIndex][i] {
 				correctCount = correctCount + 1
 			}

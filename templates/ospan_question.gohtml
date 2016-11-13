@@ -12,12 +12,14 @@
         <link rel="stylesheet" href="static/css/main.css">
     </head>
     <body class="cyan grey-text text-darken-3">
-        <div id="content" style="max-width:80%;margin:0 auto;">
-            <div id="login-page" class="row" >
-                <div class="col s12 z-depth-4 card-panel center-align">
-                    <h3 class="ospan-question">{{.Question}} =</h3>
+        <div id="content" class="letter-grid" style="max-width:80%;margin:0 auto;">
+            <div id="login-page" class="row letter-grid" >
+                <div class="col s12 z-depth-4 card-panel center-align letter-grid">
+                    <h3 class="ospan-question{{if .Timeout}}-timeout{{end}}">{{.Question}} =</h3>
                     <br/><br/>
-                    <h5 class="ospan-question-help">When you have solved the question, press mouse button to continue.</h5>
+                    {{if not .Timeout}}
+                        <h5 class="ospan-question-help">When you have solved the question, press mouse button to continue.</h5>
+                    {{end}}
                 </div>
                 <form method="post" action="/"></form>
             </div>
@@ -33,6 +35,11 @@
                 $("body").on("click", function(){
                     $("form").submit();
                 });
+                {{if .Timeout}}
+                    window.setTimeout(function(){
+                        $("form").submit();     
+                    }, {{.Timeout}});
+                {{end}}
             });
         </script>
     </body>

@@ -7,9 +7,9 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/haisum/focusedu/db/models"
 	"github.com/haisum/focusedu/session"
-	"github.com/haisum/focusedu/states/demo"
 	"github.com/haisum/focusedu/states/info"
 	"github.com/haisum/focusedu/states/login"
+	"github.com/haisum/focusedu/states/ospan"
 )
 
 type State interface {
@@ -31,9 +31,11 @@ func getState(s session.Session) (State, error) {
 	} else {
 		switch user.CurrentStep {
 		case models.StepDemoOne:
-			state = &demo.DemoOneState{}
+			state = &ospan.DemoOneState{}
 		case models.StepDemoTwo:
-			state = &demo.DemoTwoState{}
+			state = &ospan.DemoTwoState{}
+		case models.StepDemoThree:
+			state = &ospan.DemoThreeState{}
 		default:
 			state = &info.InfoState{}
 		}

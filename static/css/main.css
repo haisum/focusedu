@@ -55,6 +55,9 @@ iframe{
     .letter-grid-row{
         margin-left: 70px;
     }
+    #content.letter-grid{
+        width: 940px;
+    }
 }
 
 .row .col.s12.letter-panel{
@@ -64,6 +67,12 @@ iframe{
 .ospan-question{
     margin-top: 2em;
 }
+
+.ospan-question-timeout{
+    margin-top: 3em;
+    margin-bottom: 3em;
+}
+
 .ospan-result{
     margin-top: 2em;
     margin-right: 3em;
