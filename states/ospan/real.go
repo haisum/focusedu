@@ -49,7 +49,6 @@ func (ds *RealOSPANState) Render(w io.Writer, values url.Values) error {
 			ds.u.OSPANScore = ds.u.OSPANScore + len(sets[currentSetIndex])
 		}
 		ds.u.TotalCorrect = ds.u.TotalCorrect + result.CorrectLetters
-		ds.u.AccuracyErrors = ds.u.MathErrors + ds.u.SpeedErrors
 		ds.u.Update()
 		ds.s.Set(session.UserSession, ds.u)
 		ds.s.Save()
@@ -118,8 +117,6 @@ func (ds *RealOSPANState) Process(values url.Values) error {
 		result.Total = result.Total + 1
 		if values.Get("IsTrue") == strconv.FormatInt(int64(sets[currentSetIndex][currentItemIndex].Question.IsTrue), 10) {
 			result.CorrectAnswers = result.CorrectAnswers + 1
-		} else if values.Get("IsTrue") == "" {
-			ds.u.SpeedErrors = ds.u.SpeedErrors + 1
 		} else {
 			ds.u.MathErrors = ds.u.MathErrors + 1
 		}
