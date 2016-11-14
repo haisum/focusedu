@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>OSPAN - Demo</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="static/css/materialize.min.css">
+        <link rel="stylesheet" href="static/css/page-center.css">
+        <link rel="stylesheet" href="static/css/main.css">
+    </head>
+    <body class="cyan grey-text text-darken-3">
+        <div id="content" style="max-width:80%;margin:0 auto;">
+            <div id="login-page" class="row">
+                <div class="col s12 z-depth-4 card-panel">
+                <p>
+                    <p><b>This is the end of the practice.</b></p>
+                    <p>
+                    The real trials will look like the practice trials you just completed.
+                    First you will get a math problem to solve, then a letter to remember.
+                    </p>
+                    <p>
+                    When you see the recall screen, select the letters in the order presented.
+                    If you forget a letter, tap the BLANK box to mark where it should go.
+                    </p>
+                    <p>
+                    Some of the sets will have more math problems and letters than others.
+                    </p>
+
+                    <p>It is important that you do your best on both the math problems and the letter recall parts of this experiment.</p>
+                    <p>
+                    Remember on the math you must work as QUICKLY and ACCURATELY as possible.
+                    Also, remember to keep your math accuracy at 85% or above.
+                    </p>
+
+                    <p><b>Do you have any questions?</b></p>
+
+                    If not, tap the screen to begin the experiment.
+                </p>
+                <form method="post" action="/"></form>
+                </div>
+            </div>
+        </div>
+        <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="static/js/vendor/handlebars-v3.0.3.js"></script>
+        <script src="static/js/vendor/materialize.min.js"></script>
+        <script src="static/js/vendor/materialize.clockpicker.js"></script>
+        <script src="static/js/main.js"></script>
+        <script>$(app.init);</script>
+        <script type="text/javascript">
+            $(function(){
+                $("body").on("click", function(){
+                    $("form").submit();
+                });
+            });
+        </script>
+    </body>
+</html>

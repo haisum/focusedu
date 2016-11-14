@@ -73,7 +73,7 @@ func (ds *DemoTwoState) renderIntro(w io.Writer, values url.Values) error {
 func (ds *DemoTwoState) Process(values url.Values) error {
 	if ds.s.Get(session.SetsSession) == nil {
 		log.Info("No sets defined, setting them")
-		sets, err := set.GetQuestionsSet(totalQuestions)
+		sets, err := set.GetQuestionsSet(ds.s.Get(session.UserSession).(*models.User).ID, totalQuestions)
 		if err != nil {
 			log.WithError(err).Error("Couldn't get sets")
 			return err

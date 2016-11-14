@@ -24,6 +24,12 @@ type User struct {
 	CurrentScore    int
 	CurrentStep     Step
 	QuestionTimeout int64
+	UsedQuestions   string
+	OSPANScore      int
+	TotalCorrect    int
+	SpeedErrors     int
+	AccuracyErrors  int
+	MathErrors      int
 }
 
 type Step int
@@ -34,8 +40,10 @@ const (
 	StepDemoTwo
 	StepDemoThree
 	StepOSPAN
-	StepModule
-	StepModuleTest
+	StepModuleOne
+	StepModuleOneTest
+	StepModuleTwo
+	StepModuleTwoTest
 	StepFeedback
 )
 
@@ -95,8 +103,10 @@ func (u *User) Validate() map[string]string {
 
 func (u *User) Update() error {
 	db := db.Get()
-	stmt, err := db.Preparex("UPDATE USER SET AGE = ? , Name= ?, Gender=?, MidtermScore=?, CurrentStep=? WHERE ID=?")
-	_, err = stmt.Exec(u.Age, u.Name, u.Gender, u.MidtermScore, u.CurrentStep, u.ID)
+	stmt, err := db.Preparex(`UPDATE USER SET AGE = ? , Name= ?, Gender=?, MidtermScore=?, CurrentStep=?,  
+								OSPANScore=?, TotalCorrect=?, SpeedErrors=?, AccuracyErrors=?, MathErrors=?
+								WHERE ID=?`)
+	_, err = stmt.Exec(u.Age, u.Name, u.Gender, u.MidtermScore, u.CurrentStep, u.OSPANScore, u.TotalCorrect, u.SpeedErrors, u.AccuracyErrors, u.MathErrors, u.ID)
 	defer stmt.Close()
 	if err != nil {
 		log.WithFields(log.Fields{

@@ -1,7 +1,6 @@
 package set
 
 import (
-	"errors"
 	"math/rand"
 
 	log "github.com/Sirupsen/logrus"
@@ -25,40 +24,34 @@ type SetResult struct {
 type Sets []Set
 
 var randLetters = []string{"F", "H", "J", "K", "L", "N", "P", "Q", "R", "S", "T", "Y"}
-var questions = []*models.OSPANQuestion{
-	{Question: "1/1 + 1", Option: "2", IsTrue: 1},
-	{Question: "2/1 - 1", Option: "2", IsTrue: 0},
-	{Question: "(2 * 3) + 9 - 2", Option: "10", IsTrue: 0},
-	{Question: "(1/1 + 1) - 1", Option: "0", IsTrue: 1},
-	{Question: "1/2 + 1", Option: "0.5", IsTrue: 0},
-	{Question: "3/4 + 1", Option: "1.3", IsTrue: 1},
-	{Question: "2-354*1 + 1", Option: "2", IsTrue: 0},
-	{Question: "6/12 + 0.5", Option: "1", IsTrue: 1},
-	{Question: "1/2 + 1", Option: "1.5", IsTrue: 1},
-}
 
-func GetSets(total int, haveLetters, haveQuestions bool) (Sets, error) {
+func GetSets(userid, total int, haveLetters, haveQuestions bool) (Sets, error) {
 	var sets Sets
-	questionRand := random.NewUniqueRand(len(questions))
 	for i := 0; i < total; i++ {
 		var s Set
 		letterRand := random.NewUniqueRand(len(randLetters))
 		//return 0 or 1 randomly
-		totalSetElems := rand.Intn(2)
-		log.Infof("Rand val: %d", totalSetElems)
+		totalSetElems := rand.Intn(2) + 2
+		var (
+			qs  []*models.OSPANQuestion
+			err error
+		)
+		log.Infof("Total elems: %d", totalSetElems)
+		if haveQuestions {
+			qs, err = models.GetQuestions(userid, totalSetElems)
+		}
+		if err != nil {
+			log.WithError(err).Error("Error in fetching questions from db")
+			return sets, err
+		}
 		// 2 or 3 elements
-		for j := 0; j < totalSetElems+2; j++ {
+		for j := 0; j < totalSetElems; j++ {
 			setItem := SetItem{}
 			if haveLetters {
 				setItem.Letter = randLetters[letterRand.Int()]
 			}
 			if haveQuestions {
-				qIndex := questionRand.Int()
-				log.Infof("qindex %d", qIndex)
-				if qIndex == -1 {
-					return sets, errors.New("Not enough questions in database!")
-				}
-				setItem.Question = questions[qIndex]
+				setItem.Question = qs[j]
 			}
 			s = append(s, setItem)
 		}
@@ -67,20 +60,47 @@ func GetSets(total int, haveLetters, haveQuestions bool) (Sets, error) {
 
 	return sets, nil
 }
-func GetQuestionsSet(total int) (Sets, error) {
+func GetQuestionsSet(userid, total int) (Sets, error) {
 	var sets Sets
-	questionRand := random.NewUniqueRand(len(questions))
 	var s Set
-	for j := 0; j < total; j++ {
+	qs, err := models.GetQuestions(userid, total)
+	if err != nil {
+		log.WithError(err).Error("Error in fetching questions from db")
+		return sets, err
+	}
+	for i := 0; i < total; i++ {
 		setItem := SetItem{}
-		qIndex := questionRand.Int()
-		log.Infof("qindex %d", qIndex)
-		if qIndex == -1 {
-			return sets, errors.New("Not enough questions in database!")
-		}
-		setItem.Question = questions[qIndex]
+		setItem.Question = qs[i]
 		s = append(s, setItem)
 	}
 	sets = append(sets, s)
+	return sets, nil
+}
+
+func GetRealSets(userid int) (Sets, error) {
+	var sets Sets
+	setRand := random.NewUniqueRand(5)
+	for i := 0; i < 5; i++ {
+		var s Set
+		letterRand := random.NewUniqueRand(len(randLetters))
+		totalSetElems := setRand.Int() + 3
+		var (
+			qs  []*models.OSPANQuestion
+			err error
+		)
+		log.Infof("Total elems: %d", totalSetElems)
+		qs, err = models.GetQuestions(userid, totalSetElems)
+		if err != nil {
+			log.WithError(err).Error("Error in fetching questions from db")
+			return sets, err
+		}
+		for j := 0; j < totalSetElems; j++ {
+			setItem := SetItem{}
+			setItem.Letter = randLetters[letterRand.Int()]
+			setItem.Question = qs[j]
+			s = append(s, setItem)
+		}
+		sets = append(sets, s)
+	}
 	return sets, nil
 }

@@ -29,15 +29,22 @@ func getState(s session.Session) (State, error) {
 		log.Info("No state found, setting to login state")
 		state = &login.LoginState{}
 	} else {
+		log.Infof("Current step set to %d", user.CurrentStep)
 		switch user.CurrentStep {
+		case models.StepInfo:
+			state = &info.InfoState{}
 		case models.StepDemoOne:
 			state = &ospan.DemoOneState{}
 		case models.StepDemoTwo:
 			state = &ospan.DemoTwoState{}
 		case models.StepDemoThree:
 			state = &ospan.DemoThreeState{}
+		case models.StepOSPAN:
+			rs := &ospan.RealOSPANState{}
+			rs.SetUser(user)
+			state = rs
 		default:
-			state = &info.InfoState{}
+			state = &info.FinishedState{}
 		}
 	}
 	if state != nil {

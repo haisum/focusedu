@@ -8,10 +8,23 @@ User
 	- RegisteredAt
 	- MidtermScore
 	- CurrentStep
+
+	OSPANScore      int
+	TotalCorrect    int
+	SpeedErrors     int
+	AccuracyErrors  int
+	MathErrors      int
 	FOREIGN KEY(trackartist) REFERENCES artist(artistid)
 */
 CREATE TABLE User(ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                         Name TEXT DEFAULT "", Age INTEGER DEFAULT 0, RollNo TEXT UNIQUE , Gender INTEGER DEFAULT 0, RegisteredAt INTEGER DEFAULT 0, MidtermScore INTEGER DEFAULT 0, CurrentScore INTEGER DEFAULT 0, CurrentStep INTEGER DEFAULT 0, QuestionTimeout INTEGER DEFAULT 0);
+                                         Name TEXT DEFAULT "", Age INTEGER DEFAULT 0, RollNo TEXT UNIQUE, 
+                                         Gender INTEGER DEFAULT 0, RegisteredAt INTEGER DEFAULT 0,
+                                         MidtermScore INTEGER DEFAULT 0, CurrentScore INTEGER DEFAULT 0,
+                                         CurrentStep INTEGER DEFAULT 0, QuestionTimeout INTEGER DEFAULT 0,
+                                         OSPANScore INTEGER DEFAULT 0, TotalCorrect INTEGER DEFAULT 0,
+                                         SpeedErrors INTEGER DEFAULT 0, AccuracyErrors INTEGER DEFAULT 0,
+                                         MathErrors INTEGER DEFAULT 0,
+                                         UsedQuestions TEXT DEFAULT "");
 CREATE INDEX User_RollNo ON USER (RollNo);
 
 /*
@@ -24,6 +37,56 @@ OSPANQuestion - Stores questions and there answers for ospan
 CREATE TABLE OSPANQuestion(ID INTEGER PRIMARY KEY AUTOINCREMENT,
                                                   Question TEXT DEFAULT "", Option TEXT DEFAULT "", IsTrue INTEGER DEFAULT 0);
 
+INSERT INTO OSPANQuestion (Question, Option, IsTrue) VALUES
+	("(2*9) – 9", "9", 1),
+	("(4*2) + 6", "14", 1),
+	("(1/1) - 1", "2", 0),
+	("(8*2) - 8", "2", 0),
+	("(7*3) – 3", "18", 1),
+	("(2*9) – 9", "9", 1),
+	("(8/2) + 9", "7", 0),
+	("(2*9) – 9", "9", 1),
+	("(4*2) + 6", "14", 1),
+	("(1/1) - 1", "2", 0),
+	("(8*2) - 8", "2", 0),
+	("(7*3) – 3", "18", 1),
+	("(2*9) – 9", "9", 1),
+	("(8/2) + 9", "7", 0),
+	("(2*9) – 9", "9", 1),
+	("(4*2) + 6", "14", 1),
+	("(1/1) - 1", "2", 0),
+	("(8*2) - 8", "2", 0),
+	("(7*3) – 3", "18", 1),
+	("(2*9) – 9", "9", 1),
+	("(8/2) + 9", "7", 0),
+	("(2*9) – 9", "9", 1),
+	("(4*2) + 6", "14", 1),
+	("(1/1) - 1", "2", 0),
+	("(8*2) - 8", "2", 0),
+	("(7*3) – 3", "18", 1),
+	("(2*9) – 9", "9", 1),
+	("(8/2) + 9", "7", 0),
+	("(2*9) – 9", "9", 1),
+	("(4*2) + 6", "14", 1),
+	("(1/1) - 1", "2", 0),
+	("(8*2) - 8", "2", 0),
+	("(7*3) – 3", "18", 1),
+	("(2*9) – 9", "9", 1),
+	("(8/2) + 9", "7", 0),
+	("(2*9) – 9", "9", 1),
+	("(4*2) + 6", "14", 1),
+	("(1/1) - 1", "2", 0),
+	("(8*2) - 8", "2", 0),
+	("(7*3) – 3", "18", 1),
+	("(2*9) – 9", "9", 1),
+	("(8/2) + 9", "7", 0),
+	("(2*9) – 9", "9", 1),
+	("(4*2) + 6", "14", 1),
+	("(1/1) - 1", "2", 0),
+	("(8*2) - 8", "2", 0),
+	("(7*3) – 3", "18", 1),
+	("(2*9) – 9", "9", 1),
+	("(8/2) + 9", "7", 0);
 /*
 DemoResult
 	- ID
