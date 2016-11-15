@@ -39,7 +39,9 @@ func (ds *DemoThreeState) Render(w io.Writer, values url.Values) error {
 	if ds.s.Get("result") != nil {
 		results := ds.s.Get(session.ResultsSession).(map[int]set.SetResult)
 		result := results[currentSetIndex]
+		user := ds.s.Get(session.UserSession).(*models.User)
 		return renderTemplate(w, resultTemplate, map[string]string{
+			"Timeout":        strconv.FormatInt(user.QuestionTimeout, 10),
 			"Total":          strconv.FormatInt(int64(result.Total), 10),
 			"CorrectAnswers": strconv.FormatInt(int64(result.CorrectAnswers), 10),
 			"CorrectLetters": strconv.FormatInt(int64(result.CorrectLetters), 10),

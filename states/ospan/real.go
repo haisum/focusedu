@@ -51,8 +51,10 @@ func (ds *RealOSPANState) Render(w io.Writer, values url.Values) error {
 		ds.u.TotalCorrect = ds.u.TotalCorrect + result.CorrectLetters
 		ds.u.Update()
 		ds.s.Set(session.UserSession, ds.u)
+		user := ds.s.Get(session.UserSession).(*models.User)
 		ds.s.Save()
 		return renderTemplate(w, resultTemplate, map[string]string{
+			"Timeout":        strconv.FormatInt(user.QuestionTimeout, 10),
 			"Total":          strconv.FormatInt(int64(result.Total), 10),
 			"CorrectAnswers": strconv.FormatInt(int64(result.CorrectAnswers), 10),
 			"CorrectLetters": strconv.FormatInt(int64(result.CorrectLetters), 10),

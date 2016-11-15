@@ -46,6 +46,8 @@ func getState(s session.Session) (State, error) {
 			state = rs
 		case models.StepModuleOne:
 			state = &module.ModuleOneState{}
+		case models.StepModuleTwo:
+			state = &module.ModuleTwoState{}
 		default:
 			state = &info.FinishedState{}
 		}

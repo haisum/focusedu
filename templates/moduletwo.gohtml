@@ -121,8 +121,8 @@ public class Employee {
         <script src="static/js/main.js"></script>
         <script>$(app.init);</script>
         <script type="text/javascript">
-            var atOnce = {{.AtOnce}};
-            var timeOut = {{.Timeout}};
+            var atOnce = parseInt({{.AtOnce}});
+            var timeOut = parseInt({{.Timeout}});
             var total = 8;
             var currentCount = -1;
             var distractionCount = 0;

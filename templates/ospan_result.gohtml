@@ -23,9 +23,6 @@
                     {{if .CorrectAnswers}}
                     <h5 class="ospan-result-summary">You answered {{.CorrectAnswers}} questions correctly out of {{.Total}}.</h5>
                     {{end}}
-                    {{if .Time}}
-                        <h5>{{.Time}}</h5>
-                    {{end}}
                     <form action="/" method="post">
                     </form>
                 </div>
@@ -42,6 +39,11 @@
             $("body").on("click", function(){
                 $("form").submit();
             });
+            {{if .Timeout}}
+                setTimeout(function(){
+                    $("form").submit();     
+                }, parseInt({{.Timeout}}))
+            {{end}}
         });
         </script>
     </body>

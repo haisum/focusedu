@@ -51,9 +51,7 @@ const (
 	StepDemoThree
 	StepOSPAN
 	StepModuleOne
-	StepModuleOneTest
 	StepModuleTwo
-	StepModuleTwoTest
 	StepFeedback
 )
 
@@ -131,11 +129,11 @@ func (u *User) Update() error {
 	return err
 }
 
-func (u *User) UpdateModuleOneStats(userid, distraction, example, grasping int) error {
+func (u *User) UpdateModuleOneStats(distraction, example, grasping int) error {
 	db := db.Get()
 	stmt, err := db.Preparex(`UPDATE USER SET ModuleOneDistractionCount = ? , ModuleOneExampleCount= ?, ModuleOneGraspingCount=?
 								WHERE ID=?`)
-	_, err = stmt.Exec(userid, distraction, example, grasping)
+	_, err = stmt.Exec(distraction, example, grasping, u.ID)
 	defer stmt.Close()
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -145,11 +143,11 @@ func (u *User) UpdateModuleOneStats(userid, distraction, example, grasping int) 
 	return err
 }
 
-func (u *User) UpdateModuleOneScore(userid, score int) error {
+func (u *User) UpdateModuleOneScore(score int) error {
 	db := db.Get()
 	stmt, err := db.Preparex(`UPDATE USER SET ModuleOneCorrect = ?
 								WHERE ID=?`)
-	_, err = stmt.Exec(userid, score)
+	_, err = stmt.Exec(score, u.ID)
 	defer stmt.Close()
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -159,11 +157,11 @@ func (u *User) UpdateModuleOneScore(userid, score int) error {
 	return err
 }
 
-func (u *User) UpdateModuleTwoScore(userid, score int) error {
+func (u *User) UpdateModuleTwoScore(score int) error {
 	db := db.Get()
 	stmt, err := db.Preparex(`UPDATE USER SET ModuleTwoCorrect = ?
 								WHERE ID=?`)
-	_, err = stmt.Exec(userid, score)
+	_, err = stmt.Exec(score, u.ID)
 	defer stmt.Close()
 	if err != nil {
 		log.WithFields(log.Fields{
@@ -173,11 +171,11 @@ func (u *User) UpdateModuleTwoScore(userid, score int) error {
 	return err
 }
 
-func (u *User) UpdateModuleTwoStats(userid, distraction, example, grasping int) error {
+func (u *User) UpdateModuleTwoStats(distraction, example, grasping int) error {
 	db := db.Get()
 	stmt, err := db.Preparex(`UPDATE USER SET ModuleTwoDistractionCount = ? , ModuleTwoExampleCount= ?, ModuleTwoGraspingCount=?
 								WHERE ID=?`)
-	_, err = stmt.Exec(userid, distraction, example, grasping)
+	_, err = stmt.Exec(distraction, example, grasping, u.ID)
 	defer stmt.Close()
 	if err != nil {
 		log.WithFields(log.Fields{

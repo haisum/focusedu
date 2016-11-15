@@ -31,6 +31,8 @@ const (
 	StartTimeSession        = "starttime"
 	ShowModuleOneSession    = "showmoduleone"
 	TestModuleOneSession    = "testmoduleone"
+	ShowModuleTwoSession    = "showmoduletwo"
+	TestModuleTwoSession    = "testmoduletwo"
 )
 
 type httpsession struct {
