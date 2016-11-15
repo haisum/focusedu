@@ -23,34 +23,32 @@
             <div id="login-page" class="row">
                 <div class="col s12 z-depth-4 card-panel">
                     <div class="section-0" style="visibility: hidden;">
-                        <h4>Introduction to Java</h4> 
-                        <p>When we consider a Java program, it can be defined as a collection of objects that communicate via invoking each other's methods. Let us now briefly look into what do class, object, methods, and instance variables mean.</p>
+                        <h4>Variable Types</h4> 
+                        <p>A variable provides us with named storage that our programs can manipulate. Each variable in Java has a specific type, which determines the size and layout of the variable's memory; the range of values that can be stored within that memory; and the set of operations that can be applied to the variable.</p>
                     </div>
                     <div class="section-1" style="visibility: hidden;">
-                        <h4>Methods</h4>
-                        <p>A method is basically a behavior. A class can contain many
-                        methods. It is in methods where the logics are written, data is manipulated
-                        and all the actions are executed.</p>
+                        <h4>Local Variables </h4>
+                        <p>Local variables are created when the method, constructor or block is entered and the variable will be destroyed once it exits the method, constructor, or block.</p>
                     </div>
                     <div class="section-2" style="visibility: hidden;">
-                        <h4>Classes</h4>
-                        <p>A class is a blueprint from which individual objects are created. A class can contain variable types such as Local variables, Instance variable and Class variables. It can also have any number of methods to access the value of various kinds of methods.</p>
+                        <p>Access modifiers cannot be used for local variables. They are visible only within the declared method, constructor, or block.</p>
                     </div>
                     <div class="section-3" style="visibility: hidden;">
-                        <h4>Objects</h4>
-                        <p>If we consider the real-world, we can find many objects around us, cars, dogs, humans, etc. All these objects have a state and a behavior.</p>
+                      
+                        <p>There is no default value for local variables, so local variables should be declared and an initial value should be assigned before the first use.</p>
                     </div>
                     <div class="section-4" style="visibility: hidden;">
-                        <p>If we consider a dog, then its state is - name, breed, color, and the behavior is - barking, wagging the tail, running.</p>
+                      <h4>Class/Static Variables </h4>
+                        <p>Class variables also known as static variables are declared with the static keyword in a class, but outside a method, constructor or a block. There would only be one copy of each class variable per class, regardless of how many objects are created from it..</p>
                     </div>
                     <div class="section-5" style="visibility: hidden;">
-                        <p>If you compare the software object with a real-world object, they have very similar characteristics.</p>
+                        <p>Static variables are rarely used other than being declared as constants. Constants are variables that are declared as public/private, final, and static. Constant variables never change from their initial value.</p>
                     </div>
                     <div class="section-6" style="visibility: hidden;">
-                        <p>Software objects also have a state and a behavior. A software object's state is stored in fields and behavior is shown via methods.</p>
+                        <p>Static variables are created when the program starts and destroyed when the program stops. They can be accessed by calling with the class nameClassName.VariableName.</p>
                     </div>
                     <div class="section-7" style="visibility: hidden;">
-                        <p>So in software development, methods operate on the internal state of an object and the object-to-object communication is done via methods.</p>
+                        <p>Default values are same as instance variables. For numbers, the default value is 0; for Booleans, it is false; and for object references, it is null. Values can be assigned during the declaration or within the constructor. Additionally, values can be assigned in special static initializer blocks.</p>
                     </div>
                     <div class="button" style="visibility: hidden;">
                         <button  id="module-btn" class="btn-large waves-effect waves-pink pink lighten-1" style="margin:3em;float: right;">Take me to the Test</button>
@@ -84,25 +82,26 @@
                     <div id="modal2" class="modal">
                         <div class="modal-content">
                             <div class="example">
-                                <h4>Example methods</h4>
+                                <h4>Example Static</h4>
                                 <pre class="brush: java">
-                                    public class Dog {
-                                       String breed;
-                                       int ageC
-                                       String color;
+                                   import java.io.*;
+public class Employee {
 
-                                       void barking() {
-                                       }
+   // salary  variable is a private static variable
+   private static double salary;
 
-                                       void hungry() {
-                                       }
+   // DEPARTMENT is a constant
+   public static final String DEPARTMENT = "Development ";
 
-                                       void sleeping() {
-                                       }
-                                    }
+   public static void main(String args[]) {
+      salary = 1000;
+      System.out.println(DEPARTMENT + "average salary:" + salary);
+   }
+
                                 </pre>
                                 <p>
-                                In the above example, barking (), hungry () and sleeping () are methods.
+                            This will produce the following result – <br><br>
+                            <b> Development average salary:1000 </b>
                                 </p>
                             </div>
                         </div>
