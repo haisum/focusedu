@@ -29,6 +29,8 @@ const (
 	ShowGridSession         = "showgrid"
 	TotalTimeSession        = "totaltime"
 	StartTimeSession        = "starttime"
+	ShowModuleOneSession    = "showmoduleone"
+	TestModuleOneSession    = "testmoduleone"
 )
 
 type httpsession struct {

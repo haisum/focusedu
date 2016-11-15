@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>OSPAN - Demo</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="static/css/materialize.min.css">
+        <link rel="stylesheet" href="static/css/main.css">
+        <link href="static/css/shCore.css" rel="stylesheet" type="text/css" />
+        <link href="static/css/shThemeDefault.css" rel="stylesheet" type="text/css" />
+        <style>
+            p {
+                font-size: 18px;
+            }
+        </style>
+
+    </head>
+    <body class="cyan grey-text text-darken-3">
+        <div id="content" style="max-width:80%;margin:0 auto;">
+            <div id="login-page" class="row">
+                <div class="col s12 z-depth-4 card-panel">
+                    <div class="section-0" style="visibility: hidden;">
+                        <h4>Introduction to Java</h4> 
+                        <p>When we consider a Java program, it can be defined as a collection of objects that communicate via invoking each other's methods. Let us now briefly look into what do class, object, methods, and instance variables mean.</p>
+                    </div>
+                    <div class="section-1" style="visibility: hidden;">
+                        <h4>Methods</h4>
+                        <p>A method is basically a behavior. A class can contain many
+                        methods. It is in methods where the logics are written, data is manipulated
+                        and all the actions are executed.</p>
+                    </div>
+                    <div class="section-2" style="visibility: hidden;">
+                        <h4>Classes</h4>
+                        <p>A class is a blueprint from which individual objects are created. A class can contain variable types such as Local variables, Instance variable and Class variables. It can also have any number of methods to access the value of various kinds of methods.</p>
+                    </div>
+                    <div class="section-3" style="visibility: hidden;">
+                        <h4>Objects</h4>
+                        <p>If we consider the real-world, we can find many objects around us, cars, dogs, humans, etc. All these objects have a state and a behavior.</p>
+                    </div>
+                    <div class="section-4" style="visibility: hidden;">
+                        <p>If we consider a dog, then its state is - name, breed, color, and the behavior is - barking, wagging the tail, running.</p>
+                    </div>
+                    <div class="section-5" style="visibility: hidden;">
+                        <p>If you compare the software object with a real-world object, they have very similar characteristics.</p>
+                    </div>
+                    <div class="section-6" style="visibility: hidden;">
+                        <p>Software objects also have a state and a behavior. A software object's state is stored in fields and behavior is shown via methods.</p>
+                    </div>
+                    <div class="section-7" style="visibility: hidden;">
+                        <p>So in software development, methods operate on the internal state of an object and the object-to-object communication is done via methods.</p>
+                    </div>
+                    <div class="button pull-right" id="module-btn" style="visibility: hidden;">
+                        <button class="btn-large waves-effect waves-pink pink lighten-1" style="margin:3em;float: right;">Take me to the Test</a>
+                    </div>
+                    <div>
+                        <form id="module-form" action="/" method="post">
+                            <input id="distractionCount" type="hidden" value="0" name="distractionCount">
+                            <input id="exampleCount" type="hidden" value="0" name="exampleCount">
+                            <input id="graspingCount" type="hidden" value="0" name="graspingCount">
+                        </form>
+                    </div>
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                            <h4>You are inactive</h4>
+                            <form action="#">
+                                <p>
+                                  <input class="with-gap" name="group1" value="0" type="radio" id="test1" />
+                                  <label for="test1">I was distracted by noise/phone etc.</label>
+                                </p>
+                                <p class="grasping">
+                                  <input class="with-gap" name="group1" value="1" type="radio" id="test2" />
+                                  <label for="test2">I can't grasp the content, show me lesser content.</label>
+                                </p>
+                                <p>
+                                  <input class="with-gap" name="group1" value="2" type="radio" id="test3"  />
+                                  <label for="test3">Show me more examples</label>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                    <div id="modal2" class="modal">
+                        <div class="modal-content">
+                            <div class="example">
+                                <h4>Example methods</h4>
+                                <pre class="brush: java">
+                                    public class Dog {
+                                       String breed;
+                                       int ageC
+                                       String color;
+
+                                       void barking() {
+                                       }
+
+                                       void hungry() {
+                                       }
+
+                                       void sleeping() {
+                                       }
+                                    }
+                                </pre>
+                                <p>
+                                In the above example, barking (), hungry () and sleeping () are methods.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                          <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="static/js/vendor/jquery-1.11.2.min.js"></script>
+        <script src="static/js/vendor/handlebars-v3.0.3.js"></script>
+        <script src="static/js/vendor/materialize.min.js"></script>
+        <script src="static/js/vendor/materialize.clockpicker.js"></script>
+        <script type="text/javascript" src="static/js/shCore.js"></script>
+        <script type="text/javascript" src="static/js/shBrushJava.js"></script>
+        <script src="static/js/main.js"></script>
+        <script>$(app.init);</script>
+        <script type="text/javascript">
+            var atOnce = {{.AtOnce}};
+            var timeOut = {{.Timeout}};
+            var total = 8;
+            var currentCount = -1;
+            var distractionCount = 0;
+            var exampleCount = 0;
+            var graspingCount = 0;
+
+            function showNextStates(){
+                currentCount = atOnce   + currentCount;
+                for (var i=0; i <= currentCount; i++) {
+                    $(".section-" + i).css("visibility", "visible");
+                }
+                if (currentCount == (total - 1)){
+                    $("#module-btn").css("visibility", "visible");
+                }
+            }
+
+            function hideLastTwoStates(){
+                $(".section-" + (currentCount--)).css("visibility", "hidden");
+                $(".section-" + (currentCount--)).css("visibility", "hidden");
+                $("#module-btn").css("visibility", "hidden");
+            }
+
+            function showPopup(){
+                console.log("Showing popup because no activity");
+                $("body").off("click");
+                $("#example").hide();
+                $("input[name=group1]").prop("checked", false);
+                if (currentCount <= 1) {
+                    $(".grasping").hide();
+                } else {
+                    $(".grasping").show();
+                }
+                $("#modal1").modal("open");
+            }
+            var ticker;
+            function setBodyEvent(){
+                $("body").on("click", function(){
+                    if(currentCount == (total - 1)){
+                        return;
+                    }
+                    showNextStates();
+                    clearTimeout(ticker);
+                    ticker =  setTimeout(function() {
+                        showPopup();
+                    }, timeOut);
+                });
+                ticker =  setTimeout(function() {
+                    showPopup();
+                }, timeOut);
+            }
+            $(function(){
+                showNextStates();
+                $('#modal2').modal({
+                     complete: function() { setBodyEvent(); }
+                });
+                $('#modal1').modal({dismissible: false});
+                ticker =  setTimeout(function() {
+                    showPopup();
+                }, timeOut);
+                $("body").on("click", function(){
+                    showNextStates();
+                    clearTimeout(ticker);
+                    ticker =  setTimeout(function() {
+                        showPopup();
+                    }, timeOut);
+                });
+                $("#module-btn").on("click", function(){
+                    $("#graspingCount").val(graspingCount);
+                    $("#distractionCount").val(distractionCount);
+                    $("#exampleCount").val(exampleCount);
+                    $("#module-form").submit();
+                });
+                $("input[name='group1']").on("change", function(){
+                    var checkedVal = $("input[name=group1]:checked").val();
+                    //distracted
+                    if (checkedVal == "0"){
+                        distractionCount += 1;
+                        $("#modal1").modal("close");
+                        setBodyEvent();
+                    } else if (checkedVal == "1"){
+                        graspingCount += 1;
+                        atOnce = 2;
+                        hideLastTwoStates();
+                        $("#modal1").modal("close");
+                        setBodyEvent();
+                    } else if (checkedVal == "2"){
+                        //show example
+                        exampleCount += 1;
+                        $("#modal1").modal("close");
+                        $("#modal2").modal("open");
+                    }
+                });
+                SyntaxHighlighter.all();
+            });
+        </script>
+    </body>
+</html>

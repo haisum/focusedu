@@ -23,7 +23,15 @@ CREATE TABLE User(ID INTEGER PRIMARY KEY AUTOINCREMENT,
                                          CurrentStep INTEGER DEFAULT 0, QuestionTimeout INTEGER DEFAULT 0,
                                          OSPANScore INTEGER DEFAULT 0, TotalCorrect INTEGER DEFAULT 0,
                                          SpeedErrors INTEGER DEFAULT 0, AccuracyErrors INTEGER DEFAULT 0,
-                                         MathErrors INTEGER DEFAULT 0,
+                                         MathErrors INTEGER DEFAULT 0, Type INTEGER DEFAULT 1,
+                                         ModuleOneDistractionCount INTEGER DEFAULT 0,
+                                         ModuleOneExampleCount INTEGER DEFAULT 0,
+                                         ModuleOneGraspingCount INTEGER DEFAULT 0,
+                                         ModuleOneCorrect INTEGER DEFAULT 0,
+                                         ModuleTwoDistractionCount INTEGER DEFAULT 0,
+                                         ModuleTwoExampleCount INTEGER DEFAULT 0,
+                                         ModuleTwoGraspingCount INTEGER DEFAULT 0,
+                                         ModuleTwoCorrect INTEGER DEFAULT 0,
                                          UsedQuestions TEXT DEFAULT "");
 CREATE INDEX User_RollNo ON USER (RollNo);
 

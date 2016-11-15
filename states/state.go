@@ -9,6 +9,7 @@ import (
 	"github.com/haisum/focusedu/session"
 	"github.com/haisum/focusedu/states/info"
 	"github.com/haisum/focusedu/states/login"
+	"github.com/haisum/focusedu/states/module"
 	"github.com/haisum/focusedu/states/ospan"
 )
 
@@ -43,6 +44,8 @@ func getState(s session.Session) (State, error) {
 			rs := &ospan.RealOSPANState{}
 			rs.SetUser(user)
 			state = rs
+		case models.StepModuleOne:
+			state = &module.ModuleOneState{}
 		default:
 			state = &info.FinishedState{}
 		}
