@@ -37,7 +37,7 @@ func (ms *ModuleTwoState) Render(w io.Writer, values url.Values) error {
 			AtOnce = "8"
 		}
 		return renderTemplate(w, moduleTwoTemplate, map[string]string{
-			"Timeout":  strconv.FormatInt(user.QuestionTimeout, 10),
+			"Timeout":  strconv.FormatInt(user.QuestionTimeout*5, 10),
 			"AtOnce":   AtOnce,
 			"UserType": strconv.FormatInt(int64(user.Type), 10),
 		})
