@@ -7,6 +7,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/haisum/focusedu/db/models"
 	"github.com/haisum/focusedu/session"
+	"github.com/haisum/focusedu/states/feedback"
 	"github.com/haisum/focusedu/states/info"
 	"github.com/haisum/focusedu/states/login"
 	"github.com/haisum/focusedu/states/module"
@@ -48,6 +49,8 @@ func getState(s session.Session) (State, error) {
 			state = &module.ModuleOneState{}
 		case models.StepModuleTwo:
 			state = &module.ModuleTwoState{}
+		case models.StepFeedback:
+			state = &feedback.FeedbackState{}
 		default:
 			state = &info.FinishedState{}
 		}
