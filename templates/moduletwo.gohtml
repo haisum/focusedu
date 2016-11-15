@@ -128,6 +128,7 @@ public class Employee {
             var distractionCount = 0;
             var exampleCount = 0;
             var graspingCount = 0;
+            var userType = {{.UserType}};
 
             function showNextStates(){
                 currentCount = atOnce   + currentCount;
@@ -174,6 +175,17 @@ public class Employee {
                 }, timeOut);
             }
             $(function(){
+                $("#module-btn").on("click", function(){
+                    $("#graspingCount").val(graspingCount);
+                    $("#distractionCount").val(distractionCount);
+                    $("#exampleCount").val(exampleCount);
+                    $("#module-form").submit();
+                });
+                if(userType == "2"){
+                    atOnce = 8;
+                    showNextStates();
+                    return;
+                }
                 showNextStates();
                 $('#modal2').modal({
                      complete: function() { setBodyEvent(); }
@@ -188,12 +200,6 @@ public class Employee {
                     ticker =  setTimeout(function() {
                         showPopup();
                     }, timeOut);
-                });
-                $("#module-btn").on("click", function(){
-                    $("#graspingCount").val(graspingCount);
-                    $("#distractionCount").val(distractionCount);
-                    $("#exampleCount").val(exampleCount);
-                    $("#module-form").submit();
                 });
                 $("input[name='group1']").on("change", function(){
                     var checkedVal = $("input[name=group1]:checked").val();

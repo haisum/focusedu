@@ -133,6 +133,7 @@ func (ds *DemoThreeState) Process(values url.Values) error {
 				ds.s.Set(session.CurrentItemSession, nil)
 				ds.s.Set(session.CurrentSetSession, nil)
 				ds.s.Set(session.CurrentItemStateSession, nil)
+				ds.s.Set(session.ResultsSession, nil)
 				err = ds.s.Save()
 				return err
 			}

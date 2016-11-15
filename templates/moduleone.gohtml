@@ -124,6 +124,7 @@
         <script type="text/javascript">
             var atOnce = parseInt({{.AtOnce}});
             var timeOut = parseInt({{.Timeout}});
+            var userType = {{.UserType}};
             var total = 8;
             var currentCount = -1;
             var distractionCount = 0;
@@ -175,6 +176,17 @@
                 }, timeOut);
             }
             $(function(){
+                $("#module-btn").on("click", function(){
+                    $("#graspingCount").val(graspingCount);
+                    $("#distractionCount").val(distractionCount);
+                    $("#exampleCount").val(exampleCount);
+                    $("#module-form").submit();
+                });
+                if(userType == "2"){
+                    atOnce = 8;
+                    showNextStates();
+                    return;
+                }
                 showNextStates();
                 $('#modal2').modal({
                      complete: function() { setBodyEvent(); }
@@ -189,12 +201,6 @@
                     ticker =  setTimeout(function() {
                         showPopup();
                     }, timeOut);
-                });
-                $("#module-btn").on("click", function(){
-                    $("#graspingCount").val(graspingCount);
-                    $("#distractionCount").val(distractionCount);
-                    $("#exampleCount").val(exampleCount);
-                    $("#module-form").submit();
                 });
                 $("input[name='group1']").on("change", function(){
                     var checkedVal = $("input[name=group1]:checked").val();
